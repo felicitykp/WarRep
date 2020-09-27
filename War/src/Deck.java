@@ -1,11 +1,9 @@
 import java.util.LinkedList;
 
-public class Deck {
+public class Deck<T> extends LinkedList<T>{
 	
 	//VARIABLES
 	public LinkedList<Card> deck; //main linked list to work with
-
-	
 	
 	//setup deck
 	public Deck() {
@@ -38,15 +36,17 @@ public class Deck {
 		
 	}
 	
-	//setup shuffle method
+	//SHUFFLE METHOD
 	public void ShuffleDeck() {
+		
 		for(int i = 0; i < 52; i++) {
 			int temp = (int)(Math.random() * (52 - i));
 			Card target = deck.remove(temp);
 			deck.add(target);
+			
 		}
+		
 	}
-	
 	
 	
 
