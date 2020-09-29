@@ -72,7 +72,7 @@ public class LinkedList<T> extends AbstractList<T> {
 		Node curr = head;
 		
 		//get to one before the one we are removing
-		for(int i = 0; i < index-1; i++) {
+		for(int i = 0; i < index-1 && curr.next.next != null; i++) {
 			curr = curr.next;
 		}
 		

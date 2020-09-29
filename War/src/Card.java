@@ -18,5 +18,8 @@ public class Card {
 		return value;
 	}
 	
+	public int getCardSuit() {
+		return suit;
+	}
 	
 }
