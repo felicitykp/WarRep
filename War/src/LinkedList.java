@@ -72,7 +72,7 @@ public class LinkedList<T> extends AbstractList<T> {
 		Node curr = head;
 		
 		//get to one before the one we are removing
-		for(int i = 0; i < index-1 && curr.next.next != null; i++) {
+		for(int i = 0; i < index-1; i++) {
 			curr = curr.next;
 		}
 		
@@ -80,7 +80,12 @@ public class LinkedList<T> extends AbstractList<T> {
 		Node temp = curr.next;
 		
 		//remove link
-		curr.next = curr.next.next;
+		if(curr.next.next != null) {
+			curr.next = curr.next.next;
+		} else {
+			curr.next = null;
+		}
+		
 		
 		//return removed variable
 		return temp.info;
