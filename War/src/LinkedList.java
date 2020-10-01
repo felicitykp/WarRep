@@ -69,6 +69,12 @@ public class LinkedList<T> extends AbstractList<T> {
 	//removing a node
 	public T remove (int index) { //index must be within our list
 		
+		if (index == 0) {
+			Node temp = head;		
+			head = temp.next;
+			return temp.info;
+		}
+		
 		Node curr = head;
 		
 		//get to one before the one we are removing
@@ -130,6 +136,5 @@ public class LinkedList<T> extends AbstractList<T> {
 		}
 		return output.substring(0,output.length()-2) +"]";
 	}
-	
 	
 }

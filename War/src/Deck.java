@@ -2,31 +2,35 @@ public class Deck extends LinkedList<Card>{
 	
 	
 	//setup deck
-	public Deck() {
+	public Deck(boolean addCards) {
 		
-		//HEARTS
-		for(int i = 1; i <= 13; i++) {
-			Card temp = new Card(i, 1);
-			add(temp);
+		if(addCards) { //empty decks only added
+			//HEARTS
+			for(int i = 1; i <= 13; i++) {
+				Card temp = new Card(i, 1);
+				add(temp);
+			}
+			
+			//CLUBS
+			for(int i = 1; i <= 13; i++) {
+				Card temp = new Card(i, 2);
+				add(temp);
+			}
+			
+			//DIAMONDS
+			for(int i = 1; i <= 13; i++) {
+				Card temp = new Card(i, 3);
+				add(temp);
+			}
+			
+			//SPADES
+			for(int i = 1; i <= 13; i++) {
+				Card temp = new Card(i, 4);
+				add(temp);
+			}
 		}
 		
-		//CLUBS
-		for(int i = 1; i <= 13; i++) {
-			Card temp = new Card(i, 2);
-			add(temp);
-		}
 		
-		//DIAMONDS
-		for(int i = 1; i <= 13; i++) {
-			Card temp = new Card(i, 3);
-			add(temp);
-		}
-		
-		//SPADES
-		for(int i = 1; i <= 13; i++) {
-			Card temp = new Card(i, 4);
-			add(temp);
-		}
 		
 	}
 	

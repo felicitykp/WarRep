@@ -1,14 +1,16 @@
 
-public class War {
+
+
+public class War{
 
 	//VARIABLES
-	public static LinkedList<Card> p1Deck = new LinkedList<Card>();
-	public static LinkedList<Card> p2Deck = new LinkedList<Card>();
-	public static LinkedList<Card> pile = new LinkedList<Card>();
-	
+	public Deck p1Deck = new Deck(false);
+	public Deck p2Deck = new Deck(false);
+	public Deck pile = new Deck(false);
+
 	//CONSTRUCTOR
 	public War() {
-		Deck deck = new Deck();
+		Deck deck = new Deck(true);
 		
 		deck.ShuffleDeck();
 		
@@ -18,34 +20,46 @@ public class War {
 			p1Deck.add(target);
 		}
 		
+		p2Deck = deck;
 		
-		for(int i = 0; i < 26; i++) {
-			int temp = i;
-			Card target = (Card) deck.remove(temp);
-			p2Deck.add(target);
-		}
+		playGame();
+		
 	}
 	
 	//METHODS
-	public void collect(LinkedList<Card> deck) { //adds cards from pile to the player
+	
+	//adds pile to a player
+	public void collect(Deck deck) { 
+		pile.add(deck.get(0));
 		pile.add(deck.get(0));
 	}
 	
-	public Card place(LinkedList<Card> deck) { //places first card from player to pile
+	//moves first card from player to pile
+	public Card place(Deck deck) { 
 		Card target = deck.remove(0);
 		pile.add(target);
 		return target;
 	}
 	
-	public Boolean gameOver() { //check if game is over
-		if(p1Deck.size() == 52 || p1Deck.size() == 0) {
+	//checks if game is over
+	public Boolean gameOver() { 
+		if(p2Deck.size() == 1 || p1Deck.size() == 1) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public void print(Card temp, int x) { //prints what card is placed
+	public int checkWinner() {
+		if(p1Deck.size() == 52) {
+			return 1;
+		} else {
+			return 2;
+		}
+	}
+	
+	//prints what card is placed
+	public void print(Card temp, int x) { 
 		
 		if(temp.getCardSuit() == 1) {
 			if(temp.getCardValue() < 11) {
@@ -89,33 +103,42 @@ public class War {
 			}
 		}
 	}
-
-
-public static void main(String[] args){
-	War play = new War();
 	
-	while (play.gameOver() == false) {
-		
-		//deal player 1's card
-		Card p1 = play.place(p1Deck);
-		play.print(p1, 1);
-		
-		//deal player 2's card
-		Card p2 = play.place(p2Deck);
-		play.print(p2, 2);
-		
-		//check who has higher value
-		if (p1.getCardValue() > p2.getCardValue()) {
-			play.collect(p1Deck);
-			System.out.println("Player 1 wins battle");
-		} else if (p1.getCardValue() < p2.getCardValue()) {
-			play.collect(p2Deck);
-			System.out.println("Player 2 wins battle");
-		} else {
-			System.out.println("Stalemate! Retry round");
+	public void playGame() {				
+		while (gameOver() == false) {
+			
+			
+			//deal player 1's card
+			Card p1 = place(p1Deck);
+			print(p1, 1);
+			
+			//deal player 2's card
+			Card p2 = place(p2Deck);
+			print(p2, 2);
+			
+			//check who has higher value
+			if (p1.getCardValue() > p2.getCardValue()) {
+				collect(p1Deck);
+				System.out.println("Player 1 wins battle\n");
+			} else if (p1.getCardValue() < p2.getCardValue()) {
+				collect(p2Deck);
+				System.out.println("Player 2 wins battle\n");
+			} else {
+				System.out.println("Stalemate! Retry round\n");
+			}
 		}
+		
+		System.out.println("Player " + checkWinner() + " wins!");
 		
 	}
 	
-}
+	
+	
+
+	//NICE CLEAN MAIN METHOD :)
+	public static void main(String[] args){
+	
+	new War();
+	
+	}
 }
