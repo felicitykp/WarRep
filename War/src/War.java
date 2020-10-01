@@ -32,8 +32,11 @@ public class War{
 	
 	//adds pile to a player
 	public void collect(Deck deck) {
-		deck.add(pile.get(0));
-		deck.add(pile.get(0));
+		Card target1 = pile.remove(0);
+		Card target2 = pile.remove(0);
+		
+		deck.add(target1);
+		deck.add(target2);
 	}
 	
 	//moves first card from player to pile
