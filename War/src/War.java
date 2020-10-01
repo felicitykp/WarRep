@@ -51,11 +51,12 @@ public class War{
 	}
 	
 	public int checkWinner() {
-		if(p1Deck.size() == 52) {
-			return 1;
-		} else {
+		if(p1Deck.size() == 1) {
 			return 2;
+		} else if (p2Deck.size() == 1){
+			return 1;
 		}
+		return 0;
 	}
 	
 	//prints what card is placed
