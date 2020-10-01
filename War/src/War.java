@@ -7,6 +7,8 @@ public class War{
 	public Deck p1Deck = new Deck(false);
 	public Deck p2Deck = new Deck(false);
 	public Deck pile = new Deck(false);
+	
+	public int battles = 1;
 
 	//CONSTRUCTOR
 	public War() {
@@ -29,21 +31,21 @@ public class War{
 	//METHODS
 	
 	//adds pile to a player
-	public void collect(Deck deck) { 
-		pile.add(deck.get(0));
-		pile.add(deck.get(0));
+	public void collect(Deck deck) {
+		deck.add(pile.get(0));
+		deck.add(pile.get(0));
 	}
 	
 	//moves first card from player to pile
 	public Card place(Deck deck) { 
 		Card target = deck.remove(0);
-		pile.add(target);
+		pile.addTo(target, 0);
 		return target;
 	}
 	
 	//checks if game is over
 	public Boolean gameOver() { 
-		if(p2Deck.size() == 1 || p1Deck.size() == 1) {
+		if(p2Deck.size() == 0 || p1Deck.size() == 0) {
 			return true;
 		} else {
 			return false;
@@ -51,13 +53,14 @@ public class War{
 	}
 	
 	public int checkWinner() {
-		if(p1Deck.size() == 1) {
+		if(p1Deck.size() == 0) {
 			return 2;
-		} else if (p2Deck.size() == 1){
+		} else if (p2Deck.size() == 0){
 			return 1;
 		}
 		return 0;
 	}
+	
 	
 	//prints what card is placed
 	public void print(Card temp, int x) { 
@@ -105,6 +108,11 @@ public class War{
 		}
 	}
 	
+	public void printDeckSize(Deck deck, int player) {
+		int size = deck.size();
+		System.out.println("Player " + player + " has " + size + " cards");
+	}
+	
 	public void playGame() {				
 		while (gameOver() == false) {
 			
@@ -120,13 +128,30 @@ public class War{
 			//check who has higher value
 			if (p1.getCardValue() > p2.getCardValue()) {
 				collect(p1Deck);
-				System.out.println("Player 1 wins battle\n");
+				System.out.println("Player 1 wins battle " + battles + "\n");
+				battles++;
 			} else if (p1.getCardValue() < p2.getCardValue()) {
 				collect(p2Deck);
-				System.out.println("Player 2 wins battle\n");
+				System.out.println("Player 2 wins battle " + battles + "\n");
+				battles++;
 			} else {
-				System.out.println("Stalemate! Retry round\n");
+				System.out.println("Stalemate! Random Winner Choosen\n");
+				int winner = (int)(Math.random() * (2));
+				if(winner == 1) {
+					collect(p1Deck);
+					System.out.println("Player 1 wins battle " + battles + "\n");
+					battles++;
+				} else if(winner == 2) {
+					collect(p2Deck);
+					System.out.println("Player 2 wins battle " + battles + "\n");
+					battles++;
+				}
 			}
+			
+			//print size of decks
+			printDeckSize(p1Deck, 1);
+			printDeckSize(p2Deck, 2);
+			System.out.println("");
 		}
 		
 		System.out.println("Player " + checkWinner() + " wins!");

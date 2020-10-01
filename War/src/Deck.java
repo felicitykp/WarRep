@@ -37,11 +37,10 @@ public class Deck extends LinkedList<Card>{
 	//SHUFFLE METHOD
 	public void ShuffleDeck() {
 		
-		for(int i = 0; i < 52; i++) {
+		for(int i = 0; i <= 52; i++) {
 			int temp = (int)(Math.random() * (52 - i));
 			Card target = remove(temp);
 			add(target);
-			
 		}
 		
 	}

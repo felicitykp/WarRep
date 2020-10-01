@@ -9,8 +9,6 @@ public class Card {
 	private int value;
 	private int suit;
 	
-	final static String[] suits = {"Hearts", "Clubs", "Diamonds", "Spades"}; // mr. david change
-	
 	public Card(int v, int s) {
 		value = v;
 		suit = s;
@@ -24,9 +22,6 @@ public class Card {
 		return suit;
 	}
 	
-	//simpler toString method for printing
-	public String toString() {
-		return value + " of " + suits[suit-1];		
-	}
+	
 	
 }
